@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KBA Basketball Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --gray1:#111111;
+  --gray2:#1A1A1A;
+  --gray3:#2A2A2A;
+  --gray4:#888888;
+  --gray5:#BBBBBB;
+  --red:#FF3300;
+  --font-display:'Oswald',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #1f1f1f;padding:0 60px;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--font-display);font-size:24px;font-weight:700;letter-spacing:4px;color:var(--white);text-decoration:none}
+.logo span{color:var(--red)}
+.nav-links{display:flex;gap:36px}
+.nav-links a{color:var(--gray5);text-decoration:none;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:400;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-family:var(--font-display);font-size:13px;letter-spacing:2px;font-weight:600;color:var(--black);background:var(--white);padding:11px 26px;text-decoration:none;text-transform:uppercase;transition:background 0.2s,color 0.2s}
+.nav-cta:hover{background:var(--red);color:var(--white)}
+
+/* HERO */
+.hero{height:100vh;min-height:640px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:var(--black)}
+.court-lines{position:absolute;inset:0;opacity:0.055;width:100%;height:100%}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 20px;max-width:900px}
+.hero-eyebrow{font-family:var(--font-body);font-size:11px;letter-spacing:6px;color:var(--red);text-transform:uppercase;font-weight:500;margin-bottom:28px;display:block}
+.hero-title{font-family:var(--font-display);font-size:clamp(64px,10vw,130px);font-weight:700;line-height:0.9;letter-spacing:-3px;text-transform:uppercase;margin-bottom:0}
+.hero-title .line1{display:block;color:var(--white)}
+.hero-title .line2{display:block;color:var(--gray4);font-weight:300;font-style:italic}
+.hero-sub{font-family:var(--font-body);font-size:15px;color:var(--gray5);letter-spacing:0.5px;margin:36px auto 48px;font-weight:300;line-height:1.8;max-width:500px}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{font-family:var(--font-display);font-size:14px;letter-spacing:3px;font-weight:600;color:var(--black);background:var(--white);padding:17px 40px;text-decoration:none;text-transform:uppercase;display:inline-block;transition:background 0.2s,color 0.2s}
+.btn-primary:hover{background:var(--red);color:var(--white)}
+.btn-ghost{font-family:var(--font-display);font-size:14px;letter-spacing:3px;font-weight:600;color:var(--white);background:transparent;border:1px solid #333;padding:17px 40px;text-decoration:none;text-transform:uppercase;display:inline-block;transition:border-color 0.2s,color 0.2s}
+.btn-ghost:hover{border-color:var(--white)}
+.ball-anim{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.scroll-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2}
+.scroll-hint span{font-size:9px;letter-spacing:5px;color:var(--gray3);text-transform:uppercase;font-weight:500}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,#333,transparent);animation:scrollAnim 1.8s ease-in-out infinite}
+@keyframes scrollAnim{0%,100%{opacity:0;transform:scaleY(0.4)}50%{opacity:1;transform:scaleY(1)}}
+
+/* STATS */
+.stats{background:var(--white);color:var(--black);padding:88px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-item{text-align:center;padding:0 24px;border-right:1px solid #E0E0E0}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:var(--font-display);font-size:clamp(52px,6vw,88px);font-weight:700;color:var(--black);line-height:1;letter-spacing:-3px}
+.stat-num sup{color:var(--red);font-size:0.5em;vertical-align:super}
+.stat-label{font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase;margin-top:14px;font-weight:400;line-height:1.5}
+
+/* SECTION */
+section{padding:108px 60px}
+.section-tag{font-size:10px;letter-spacing:6px;color:var(--red);text-transform:uppercase;font-weight:600;margin-bottom:18px;display:block}
+.section-title{font-family:var(--font-display);font-size:clamp(40px,5vw,72px);font-weight:700;text-transform:uppercase;line-height:0.95;letter-spacing:-2px;margin-bottom:28px}
+.section-body{font-size:15px;color:var(--gray5);line-height:1.9;font-weight:300;max-width:560px}
+
+/* PROGRAMS */
+.programs{background:var(--gray1);padding-top:108px;padding-bottom:0}
+.programs-intro{margin-bottom:64px}
+.programs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#1c1c1c;margin-top:0}
+.prog-card{background:var(--gray1);padding:44px 36px;position:relative;overflow:hidden;cursor:pointer;transition:background 0.3s;text-decoration:none;display:block;color:inherit}
+.prog-card:hover{background:var(--gray2)}
+.prog-card:hover .prog-arrow{transform:translateX(10px);color:var(--red)}
+.prog-card:hover .prog-num{color:#222}
+.prog-num{font-family:var(--font-display);font-size:72px;font-weight:700;color:#1c1c1c;line-height:1;margin-bottom:20px;transition:color 0.3s}
+.prog-name{font-family:var(--font-display);font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;color:var(--white)}
+.prog-desc{font-size:13px;color:var(--gray4);line-height:1.75;font-weight:300;margin-bottom:28px}
+.prog-badge{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border:1px solid #282828;color:var(--gray4);font-weight:400}
+.prog-arrow{display:block;font-size:22px;margin-top:24px;color:#333;transition:transform 0.25s,color 0.25s}
+
+/* COACHES */
+.coaches{background:var(--black)}
+.coaches-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;gap:40px;flex-wrap:wrap}
+.coaches-header .section-body{margin-bottom:0}
+.coaches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#161616}
+.coach-card{background:var(--black);padding:36px;position:relative}
+.coach-img{width:100%;aspect-ratio:3/4;background:var(--gray2);margin-bottom:24px;overflow:hidden;position:relative;display:flex;align-items:flex-end;justify-content:center}
+.coach-jersey{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.coach-num-bg{position:absolute;top:16px;right:16px;font-family:var(--font-display);font-size:80px;font-weight:700;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none}
+.coach-name{font-family:var(--font-display);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;color:var(--white)}
+.coach-role{font-size:10px;letter-spacing:4px;color:var(--red);text-transform:uppercase;font-weight:600;margin-bottom:14px;display:block}
+.coach-career{font-size:13px;color:var(--gray4);line-height:1.7;font-weight:300}
+.coach-divider{width:32px;height:1px;background:var(--gray3);margin:14px 0}
+
+/* FACILITY */
+.facility{background:var(--gray1)}
+.facility-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.facility-visual{background:var(--gray2);aspect-ratio:4/3;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.facility-list{margin-top:36px;display:flex;flex-direction:column;gap:0}
+.facility-item{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid #1e1e1e}
+.facility-item:first-child{border-top:1px solid #1e1e1e}
+.facility-dot{width:6px;height:6px;background:var(--red);flex-shrink:0}
+.facility-item-text{font-size:14px;color:var(--gray5);font-weight:300;letter-spacing:0.5px}
+
+/* CTA BAND */
+.cta-band{background:var(--white);color:var(--black);padding:108px 60px;text-align:center}
+.cta-band .section-tag{color:var(--red);text-align:center;display:block}
+.cta-band .section-title{color:var(--black);margin-bottom:16px;text-align:center}
+.cta-band p{font-size:16px;color:#666;margin-bottom:52px;font-weight:300;letter-spacing:0.3px;line-height:1.8}
+.cta-band .btn-primary{background:var(--black);color:var(--white)}
+.cta-band .btn-primary:hover{background:var(--red)}
+
+/* FOOTER */
+footer{background:#050505;border-top:1px solid #111;padding:52px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.footer-logo{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:4px;color:var(--white);text-decoration:none}
+.footer-logo span{color:var(--red)}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{font-size:11px;letter-spacing:2.5px;color:var(--gray4);text-decoration:none;text-transform:uppercase;transition:color 0.2s;font-weight:400}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:11px;color:#2a2a2a;letter-spacing:1px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat-item{padding:32px 16px;border-right:none;border-bottom:1px solid #E0E0E0}
+  .stat-item:nth-child(1),.stat-item:nth-child(2){border-right:1px solid #E0E0E0}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}
+  section{padding:72px 24px}
+  .stats{padding:56px 24px}
+  .programs{padding-top:72px}
+  .programs-grid,.coaches-grid{grid-template-columns:1fr}
+  .coaches-header{flex-direction:column;align-items:flex-start}
+  .facility-inner{grid-template-columns:1fr;gap:40px}
+  .cta-band{padding:72px 24px}
+  footer{padding:40px 24px;flex-direction:column;align-items:flex-start;gap:28px}
+}
+@media(max-width:600px){
+  .hero-title{font-size:clamp(48px,14vw,80px)}
+  .hero-btns{flex-direction:column;align-items:center}
+  .programs-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr;padding:48px 24px}
+  .stat-item{border-right:none!important;padding:28px 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">KBA<span>.</span></a>
+  <div class="nav-links">
+    <a href="#programs">프로그램</a>
+    <a href="#coaches">코치진</a>
+    <a href="#facility">시설</a>
+    <a href="#contact">문의</a>
+  </div>
+  <a href="#contact" class="nav-cta">등록하기</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+
+  <svg class="court-lines" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect x="120" y="80" width="1160" height="740" fill="none" stroke="white" stroke-width="2.5"/>
+    <line x1="700" y1="80" x2="700" y2="820" stroke="white" stroke-width="1.5"/>
+    <circle cx="700" cy="450" r="140" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="700" cy="450" r="10" fill="white"/>
+    <path d="M120 270 Q270 270 270 450 Q270 630 120 630" fill="none" stroke="white" stroke-width="1.5"/>
+    <path d="M1280 270 Q1130 270 1130 450 Q1130 630 1280 630" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="120" cy="450" r="70" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="1280" cy="450" r="70" fill="none" stroke="white" stroke-width="1.5"/>
+    <line x1="120" y1="410" x2="120" y2="490" stroke="white" stroke-width="3"/>
+    <line x1="1280" y1="410" x2="1280" y2="490" stroke="white" stroke-width="3"/>
+    <circle cx="700" cy="80" r="5" fill="white"/>
+    <circle cx="700" cy="820" r="5" fill="white"/>
+    <circle cx="120" cy="270" r="5" fill="white"/>
+    <circle cx="120" cy="630" r="5" fill="white"/>
+    <circle cx="1280" cy="270" r="5" fill="white"/>
+    <circle cx="1280" cy="630" r="5" fill="white"/>
+    <path d="M430 80 Q430 200 700 200 Q970 200 970 80" fill="none" stroke="white" stroke-width="1"/>
+    <path d="M430 820 Q430 700 700 700 Q970 700 970 820" fill="none" stroke="white" stroke-width="1"/>
+  </svg>
+
+  <svg class="ball-anim" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="ballglow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <g id="ballG" filter="url(#ballglow)">
+      <circle r="20" fill="#FF3300"/>
+      <path d="M-20,0 Q-10,-14 0,-16 Q10,-14 20,0" fill="none" stroke="#cc2200" stroke-width="1.8"/>
+      <path d="M-20,0 Q-10,14 0,16 Q10,14 20,0" fill="none" stroke="#cc2200" stroke-width="1.8"/>
+      <line x1="-20" y1="0" x2="20" y2="0" stroke="#cc2200" stroke-width="1.8"/>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.9s" repeatCount="indefinite"/>
+    </g>
+    <animateMotion href="#ballG" dur="5s" repeatCount="indefinite" calcMode="spline" keySplines="0.25,0.1,0.75,0.9">
+      <mpath href="#traj"/>
+    </animateMotion>
+    <path id="traj" d="M-40,680 Q200,20 600,380 Q950,660 1250,40" fill="none"/>
+  </svg>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">Elite Basketball Academy · Seoul</span>
+    <h1 class="hero-title">
+      <span class="line1">당신의 게임을</span>
+      <span class="line2">다음 레벨로</span>
+    </h1>
+    <p class="hero-sub">프로 선수 출신 코치진과 함께하는 체계적 훈련 시스템.<br>기초부터 엘리트까지, 진짜 농구를 배웁니다.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">무료 체험 신청</a>
+      <a href="#programs" class="btn-ghost">프로그램 보기</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">1,200<sup>+</sup></div>
+    <div class="stat-label">누적 수료생</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">98<sup>%</sup></div>
+    <div class="stat-label">수강생 재등록률</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">12<sup>년</sup></div>
+    <div class="stat-label">아카데미 운영 경력</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">34<sup>명</sup></div>
+    <div class="stat-label">프로 리그 배출</div>
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="programs-intro">
+    <span class="section-tag">Programs</span>
+    <h2 class="section-title">모든 레벨을<br>위한 프로그램</h2>
+    <p class="section-body">입문자부터 프로 지망생까지, 레벨과 목표에 맞는 최적의 훈련 과정을 제공합니다.</p>
+  </div>
+  <div class="programs-grid">
+    <a href="#contact" class="prog-card">
+      <div class="prog-num">01</div>
+      <div class="prog-name">Youth Foundation</div>
+      <div class="prog-desc">초등·중학생을 위한 기초 훈련. 드리블, 슈팅, 패스의 근본기를 단계별로 완성합니다.</div>
+      <div class="prog-badge">주 2~3회 · 90분</div>
+      <span class="prog-arrow">→</span>
+    </a>
+    <a href="#contact" class="prog-card">
+      <div class="prog-num">02</div>
+      <div class="prog-name">Advanced Guard</div>
+      <div class="prog-desc">포지션별 특화 훈련. 가드, 포워드, 센터 각 포지션의 고급 스킬을 집중적으로 개발합니다.</div>
+      <div class="prog-badge">주 3~4회 · 2시간</div>
+      <span class="prog-arrow">→</span>
+    </a>
+    <a href="#contact" class="prog-card">
+      <div class="prog-num">03</div>
+      <div class="prog-name">Elite Performance</div>
+      <div class="prog-desc">대학 진학 및 프로 지망생을 위한 풀타임 엘리트 코스. 체력, 전술, 정신력을 아우릅니다.</div>
+      <div class="prog-badge">주 5회 · 3시간</div>
+      <span class="prog-arrow">→</span>
+    </a>
+    <a href="#contact" class="prog-card">
+      <div class="prog-num">04</div>
+      <div class="prog-name">3-on-3 Specialist</div>
+      <div class="prog-desc">FIBA 3x3 규정 기반 훈련. 스몰 게임에 특화된 전술과 개인기를 빠르게 향상시킵니다.</div>
+      <div class="prog-badge">주 2회 · 90분</div>
+      <span class="prog-arrow">→</span>
+    </a>
+    <a href="#contact" class="prog-card">
+      <div class="prog-num">05</div>
+      <div class="prog-name">Mental &amp; IQ Training</div>
+      <div class="prog-desc">게임 리딩 능력과 심리적 강인함 훈련. 경기 영상 분석과 전술 세션이 포함됩니다.</div>
+      <div class="prog-badge">주 1~2회 · 60분</div>
+      <span class="prog-arrow">→</span>
+    </a>
+    <a href="#contact" class="prog-card">
+      <div class="prog-num">06</div>
+      <div class="prog-name">1:1 Private Coaching</div>
+      <div class="prog-desc">개인 맞춤형 1:1 코칭. 선수의 약점을 집중 분석하고 맞춤 커리큘럼으로 빠르게 성장시킵니다.</div>
+      <div class="prog-badge">유연한 일정</div>
+      <span class="prog-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- COACHES -->
+<section class="coaches" id="coaches">
+  <div class="coaches-header">
+    <div>
+      <span class="section-tag">Coaches</span>
+      <h2 class="section-title">프로 출신<br>코치진</h2>
+    </div>
+    <p class="section-body">KBL, NBA G리그 출신 코치들이 직접 지도합니다. 단순한 훈련이 아닌 선수의 가능성을 발굴하는 코칭입니다.</p>
+  </div>
+  <div class="coaches-grid">
+    <div class="coach-card">
+      <div class="coach-img">
+        <svg viewBox="0 0 280 373" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="373" fill="#181818"/>
+          <ellipse cx="140" cy="120" rx="58" ry="64" fill="#222"/>
+          <ellipse cx="140" cy="310" rx="110" ry="80" fill="#1e1e1e"/>
+          <text x="140" y="140" text-anchor="middle" fill="#2e2e2e" font-size="56" font-family="Oswald" font-weight="700">#7</text>
+        </svg>
+        <div class="coach-num-bg">01</div>
+      </div>
+      <div class="coach-name">김준혁</div>
+      <span class="coach-role">Head Coach</span>
+      <div class="coach-divider"></div>
+      <div class="coach-career">KBL 서울 삼성 선수 출신<br>12년 코칭 경력 · 국가대표 스태프</div>
+    </div>
+    <div class="coach-card">
+      <div class="coach-img">
+        <svg viewBox="0 0 280 373" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="373" fill="#181818"/>
+          <ellipse cx="140" cy="120" rx="58" ry="64" fill="#222"/>
+          <ellipse cx="140" cy="310" rx="110" ry="80" fill="#1e1e1e"/>
+          <text x="140" y="140" text-anchor="middle" fill="#2e2e2e" font-size="46" font-family="Oswald" font-weight="700">#23</text>
+        </svg>
+        <div class="coach-num-bg">02</div>
+      </div>
+      <div class="coach-name">이승민</div>
+      <span class="coach-role">Skills Coach</span>
+      <div class="coach-divider"></div>
+      <div class="coach-career">NBA G-League 진출 경력<br>슈팅 &amp; 드리블 전문 · 청소년 대표팀 출신</div>
+    </div>
+    <div class="coach-card">
+      <div class="coach-img">
+        <svg viewBox="0 0 280 373" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="373" fill="#181818"/>
+          <ellipse cx="140" cy="120" rx="58" ry="64" fill="#222"/>
+          <ellipse cx="140" cy="310" rx="110" ry="80" fill="#1e1e1e"/>
+          <text x="140" y="140" text-anchor="middle" fill="#2e2e2e" font-size="46" font-family="Oswald" font-weight="700">#34</text>
+        </svg>
+        <div class="coach-num-bg">03</div>
+      </div>
+      <div class="coach-name">박태양</div>
+      <span class="coach-role">Performance Coach</span>
+      <div class="coach-divider"></div>
+      <div class="coach-career">스포츠 과학 전공<br>체력·부상 예방 전문 · KBL 5개 구단 트레이너</div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITY -->
+<section class="facility" id="facility">
+  <div class="facility-inner">
+    <div>
+      <span class="section-tag">Facility</span>
+      <h2 class="section-title">최고의<br>환경</h2>
+      <p class="section-body">국제 규격의 하드코트 3면, 고속 카메라 모션 분석 시스템, 전문 웨이트룸까지. 최고의 선수를 만들기 위한 최고의 환경.</p>
+      <ul class="facility-list">
+        <li class="facility-item"><span class="facility-dot"></span><span class="facility-item-text">NBA 규격 하드코트 3면 운영</span></li>
+        <li class="facility-item"><span class="facility-dot"></span><span class="facility-item-text">4K 고속 카메라 모션 분석 시스템</span></li>
+        <li class="facility-item"><span class="facility-dot"></span><span class="facility-item-text">전문 웨이트 & 체력 훈련실</span></li>
+        <li class="facility-item"><span class="facility-dot"></span><span class="facility-item-text">영상 분석 전용 미팅룸</span></li>
+        <li class="facility-item"><span class="facility-dot"></span><span class="facility-item-text">샤워 & 라커룸 완비</span></li>
+      </ul>
+    </div>
+    <div class="facility-visual">
+      <svg viewBox="0 0 500 375" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="375" fill="#1a1a1a"/>
+        <rect x="30" y="30" width="440" height="315" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+        <line x1="250" y1="30" x2="250" y2="345" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="250" cy="187" r="60" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="250" cy="187" r="5" fill="#333"/>
+        <path d="M30 100 Q110 100 110 187 Q110 274 30 274" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M470 100 Q390 100 390 187 Q390 274 470 274" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="30" cy="187" r="30" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="470" cy="187" r="30" fill="none" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="130" cy="100" r="3" fill="#FF3300" opacity="0.8"/>
+        <circle cx="370" cy="100" r="3" fill="#FF3300" opacity="0.8"/>
+        <circle cx="130" cy="274" r="3" fill="#FF3300" opacity="0.8"/>
+        <circle cx="370" cy="274" r="3" fill="#FF3300" opacity="0.8"/>
+        <text x="250" y="200" text-anchor="middle" fill="#2a2a2a" font-size="11" font-family="Inter" letter-spacing="4">COURT A</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band" id="contact">
+  <span class="section-tag">Join Us</span>
+  <h2 class="section-title">지금 시작하세요</h2>
+  <p>첫 번째 체험 수업은 무료입니다.<br>코트 위에서 당신의 가능성을 직접 확인하세요.</p>
+  <a href="mailto:info@kba-academy.kr" class="btn-primary">무료 체험 예약 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">KBA<span>.</span></a>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">YouTube</a>
+    <a href="#">카카오톡</a>
+    <a href="#contact">문의하기</a>
+    <a href="#">오시는 길</a>
+  </div>
+  <div class="footer-copy">© 2026 KBA Basketball Academy. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
