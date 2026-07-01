@@ -1,822 +1,992 @@
-<!DOCTYPE html>
+<index.html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Röko — 뢰코</title>
-<meta name="description" content="거친 것 위에 놓인 섬세함. 빈티지 무드의 여성 캐주얼 브랜드 Röko." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Italiana&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pixcraft — 웹 디자인 에이전시</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --ivory: #FAF8F4;
-    --card: #F4F0E8;
-    --ink: #1C1916;
-    --stone: #C9C0AE;
-    --taupe: #8A8073;
-    --line: rgba(28,25,22,0.12);
-    --serif: 'Cormorant Garamond', serif;
-    --display: 'Italiana', serif;
-    --sans: 'Pretendard', -apple-system, sans-serif;
-  }
+    html { scroll-behavior: smooth; }
 
-  body {
-    font-family: var(--sans);
-    background: var(--ivory);
-    color: var(--ink);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #08091A;
+      color: #F0EEE9;
+      overflow-x: hidden;
+    }
 
-  img { display: block; max-width: 100%; }
+    /* ── Cursor Glow ── */
+    .cursor-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,240,160,0.10) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: left 0.12s ease, top 0.12s ease;
+      z-index: 0;
+    }
 
-  /* ───────── Lace scallop divider (signature element) ───────── */
-  .lace-divider {
-    width: 100%;
-    height: 28px;
-    overflow: hidden;
-    line-height: 0;
-  }
-  .lace-divider svg { width: 100%; height: 100%; display: block; }
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      position: sticky;
+      top: 0;
+      background: rgba(8,9,26,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+    }
 
-  /* ───────── Nav ───────── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 200;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(250,248,244,0.88);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: box-shadow 0.3s;
-  }
-  nav.scrolled { box-shadow: 0 1px 0 var(--line); }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: #F0EEE9;
+      text-decoration: none;
+    }
+    .logo span { color: #00F0A0; }
 
-  .nav-logo {
-    font-family: var(--display);
-    font-size: 1.3rem;
-    letter-spacing: 0.18em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
-  .nav-links a {
-    color: var(--taupe);
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    font-weight: 400;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-icons { display: flex; gap: 1.2rem; align-items: center; }
-  .nav-icon-link {
-    color: var(--ink);
-    opacity: 0.65;
-    transition: opacity 0.2s;
-  }
-  .nav-icon-link:hover { opacity: 1; }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(240,238,233,0.5);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .nav-links a:hover { color: #F0EEE9; }
 
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-  }
-  .hamburger span { width: 22px; height: 1px; background: var(--ink); }
+    .btn-nav {
+      background: #00F0A0;
+      color: #08091A;
+      border: none;
+      padding: 0.58rem 1.3rem;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-nav:hover { background: #00dfa0; transform: scale(1.04); }
 
-  /* ───────── Hero ───────── */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: stretch;
-  }
-  .hero-image {
-    position: relative;
-    overflow: hidden;
-    background: var(--card);
-  }
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 15%;
-  }
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 4.5rem 4rem;
-    position: relative;
-  }
-  .hero-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--taupe);
-    margin-bottom: 2rem;
-  }
-  .hero-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.6rem, 4.2vw, 4.4rem);
-    line-height: 1.12;
-    letter-spacing: -0.01em;
-    margin-bottom: 2.2rem;
-    color: var(--ink);
-  }
-  .hero-title em {
-    font-style: italic;
-    font-weight: 400;
-    color: var(--taupe);
-  }
-  .hero-desc {
-    font-size: 0.95rem;
-    line-height: 1.9;
-    color: var(--taupe);
-    max-width: 380px;
-    margin-bottom: 3rem;
-    font-weight: 300;
-  }
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.4rem;
-    width: fit-content;
-    transition: gap 0.25s, opacity 0.2s;
-  }
-  .hero-cta:hover { gap: 1.1rem; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #F0EEE9;
+      transition: 0.2s;
+    }
 
-  .scroll-cue {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 4.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    color: var(--taupe);
-    text-transform: uppercase;
-  }
-  .scroll-cue::after {
-    content: '';
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(var(--taupe), transparent);
-    animation: scrollLine 1.8s ease-in-out infinite;
-  }
-  @keyframes scrollLine { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      z-index: 5;
+      padding: 7rem 3rem 5rem;
+      max-width: 1000px;
+    }
 
-  /* ───────── Intro / Brand statement ───────── */
-  .intro {
-    padding: 7rem 4.5rem;
-    text-align: center;
-    max-width: 920px;
-    margin: 0 auto;
-  }
-  .intro-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--taupe);
-    margin-bottom: 2rem;
-  }
-  .intro-statement {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(1.5rem, 2.6vw, 2.3rem);
-    line-height: 1.7;
-    color: var(--ink);
-  }
-  .intro-statement .highlight {
-    font-style: normal;
-    font-weight: 500;
-  }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #00F0A0;
+      margin-bottom: 2rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: #00F0A0;
+    }
 
-  /* ───────── Gallery (asymmetric editorial grid) ───────── */
-  .gallery-section { padding: 2rem 0 6rem; }
-  .gallery-row {
-    display: grid;
-    gap: 1.1rem;
-    padding: 0 3rem;
-    margin-bottom: 1.1rem;
-  }
-  .gallery-row.r1 { grid-template-columns: 1.3fr 1fr; }
-  .gallery-row.r2 { grid-template-columns: 0.8fr 1.2fr 0.8fr; }
-  .gallery-row.r3 { grid-template-columns: 1fr 1fr; }
-  .gallery-row.r4 { grid-template-columns: 1fr 0.75fr; }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      color: #F0EEE9;
+      margin-bottom: 2rem;
+    }
+    .hero-title .accent {
+      -webkit-text-fill-color: transparent;
+      background: linear-gradient(90deg, #00F0A0 0%, #00C8FF 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
 
-  .g-item {
-    position: relative;
-    overflow: hidden;
-    background: var(--card);
-    cursor: pointer;
-  }
-  .g-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-  }
-  .g-item:hover img { transform: scale(1.035); }
-  .g-item.tall { aspect-ratio: 3/4.1; }
-  .g-item.wide { aspect-ratio: 4/3.1; }
-  .g-item.square { aspect-ratio: 1/1.05; }
+    .hero-desc {
+      font-size: 1.08rem;
+      color: rgba(240,238,233,0.5);
+      line-height: 1.8;
+      max-width: 540px;
+      margin-bottom: 2.8rem;
+      font-weight: 300;
+    }
 
-  .g-caption {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 1.3rem 1.4rem;
-    background: linear-gradient(to top, rgba(20,17,14,0.55), transparent);
-    color: #FAF8F4;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .g-item:hover .g-caption { opacity: 1; }
-  .g-caption-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    opacity: 0.75;
-    margin-bottom: 0.25rem;
-  }
-  .g-caption-price {
-    font-size: 0.72rem;
-    letter-spacing: 0.02em;
-    opacity: 0.8;
-    margin-bottom: 0.25rem;
-    font-weight: 500;
-  }
-  .g-caption-name { font-family: var(--serif); font-size: 1.15rem; font-style: italic; }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-  /* ───────── Story (brand philosophy) ───────── */
-  .story-section {
-    background: var(--card);
-    padding: 8rem 3rem;
-  }
-  .story-inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 5rem;
-    align-items: start;
-  }
-  .story-image {
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    position: sticky;
-    top: 7rem;
-  }
-  .story-image img { width: 100%; height: 100%; object-fit: cover; }
+    .btn-primary {
+      background: #00F0A0;
+      color: #08091A;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: #00dfa0; transform: translateY(-2px); }
 
-  .story-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--stone);
-    margin-bottom: 2.5rem;
-  }
-  .story-lede {
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 2.3vw, 2rem);
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--ink);
-    margin-bottom: 3rem;
-  }
-  .story-lede .neg { color: var(--taupe); }
-  .story-body p {
-    font-size: 0.96rem;
-    line-height: 2.1;
-    color: var(--taupe);
-    font-weight: 300;
-    margin-bottom: 1.7rem;
-  }
-  .story-detail-list {
-    margin: 2.6rem 0;
-    padding: 2.2rem 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .story-detail-item {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--ink);
-  }
-  .story-closing {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: var(--ink);
-    margin-top: 2.6rem;
-  }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(240,238,233,0.65);
+      border: 1px solid rgba(240,238,233,0.18);
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .btn-ghost:hover { border-color: rgba(240,238,233,0.45); color: #F0EEE9; }
 
-  /* ───────── Texture strip (vintage denim wash motif) ───────── */
-  .texture-strip {
-    height: 120px;
-    background: linear-gradient(115deg, #2A2622 0%, #4D453A 35%, #6B6155 55%, #4D453A 75%, #2A2622 100%);
-    position: relative;
-    overflow: hidden;
-  }
-  .texture-strip::before {
-    content: 'Röko · Röko · Röko · Röko · Röko · Röko · Röko · Röko · ';
-    position: absolute;
-    white-space: nowrap;
-    font-family: var(--display);
-    font-size: 3.2rem;
-    letter-spacing: 0.05em;
-    color: rgba(250,248,244,0.07);
-    top: 50%;
-    transform: translateY(-50%);
-    animation: marqueeScroll 28s linear infinite;
-  }
-  @keyframes marqueeScroll {
-    0% { left: 0; }
-    100% { left: -50%; }
-  }
+    /* ── Marquee ── */
+    .marquee-strip {
+      position: relative;
+      z-index: 5;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      overflow: hidden;
+      padding: 1.1rem 0;
+      margin-top: 4rem;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 22s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,238,233,0.25);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .marquee-dot { color: #00F0A0; opacity: 0.5; }
 
-  /* ───────── Lookbook full bleed moment (signature) ───────── */
-  .signature-section {
-    position: relative;
-    padding: 7rem 3rem;
-    text-align: center;
-  }
-  .signature-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--taupe);
-    margin-bottom: 1.4rem;
-  }
-  .signature-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 400;
-    margin-bottom: 4rem;
-  }
-  .signature-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  .sig-item { aspect-ratio: 3/4; overflow: hidden; background: var(--card); }
-  .sig-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-  .sig-item:hover img { transform: scale(1.04); }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-  /* ───────── Instagram strip ───────── */
-  .insta-section { padding: 6rem 3rem; }
-  .insta-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    max-width: 1400px;
-    margin: 0 auto 2.5rem;
-  }
-  .insta-title-group .intro-label { margin-bottom: 0.6rem; }
-  .insta-title {
-    font-family: var(--serif);
-    font-size: 1.9rem;
-    font-style: italic;
-  }
-  .insta-handle {
-    font-size: 0.85rem;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 0.3rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .insta-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.7rem;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  .insta-item { aspect-ratio: 1/1; overflow: hidden; background: var(--card); position: relative; }
-  .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.5s; }
-  .insta-item:hover img { transform: scale(1.06); }
-  .insta-overlay {
-    position: absolute; inset: 0;
-    background: rgba(28,25,22,0.25);
-    opacity: 0;
-    transition: opacity 0.3s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .insta-item:hover .insta-overlay { opacity: 1; }
-  .insta-overlay svg { color: #FAF8F4; }
+    /* ── Works ── */
+    .works-section {
+      position: relative;
+      z-index: 5;
+      padding: 6rem 3rem;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #00F0A0;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .section-link {
+      font-size: 0.82rem;
+      color: rgba(240,238,233,0.4);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .section-link:hover { color: #F0EEE9; }
 
-  /* ───────── CTA / Store banner ───────── */
-  .store-cta {
-    margin: 0 3rem 3rem;
-    background: var(--ink);
-    border-radius: 2px;
-    padding: 5rem 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    position: relative;
-    overflow: hidden;
-  }
-  .store-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 85% 20%, rgba(250,248,244,0.06), transparent 50%);
-    pointer-events: none;
-  }
-  .store-cta-text { position: relative; z-index: 1; }
-  .store-cta-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--stone);
-    margin-bottom: 1.2rem;
-  }
-  .store-cta-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    color: var(--ivory);
-    font-weight: 400;
-    max-width: 480px;
-    line-height: 1.35;
-  }
-  .store-btn {
-    position: relative;
-    z-index: 1;
-    background: var(--ivory);
-    color: var(--ink);
-    border: none;
-    padding: 1.1rem 2.6rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    font-weight: 500;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    transition: background 0.2s, transform 0.2s;
-    white-space: nowrap;
-  }
-  .store-btn:hover { background: var(--card); transform: translateY(-2px); }
-
-  /* ───────── Footer ───────── */
-  footer {
-    padding: 4rem 3rem 2.5rem;
-    border-top: 1px solid var(--line);
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 3rem;
-    max-width: 1400px;
-    margin: 0 auto 3rem;
-  }
-  .footer-logo {
-    font-family: var(--display);
-    font-size: 1.4rem;
-    letter-spacing: 0.18em;
-    margin-bottom: 1.2rem;
-  }
-  .footer-tagline {
-    font-size: 0.85rem;
-    color: var(--taupe);
-    line-height: 1.8;
-    font-weight: 300;
-    max-width: 280px;
-  }
-  .footer-col-title {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--taupe);
-    margin-bottom: 1.3rem;
-  }
-  .footer-col a, .footer-col p {
-    display: block;
-    font-size: 0.86rem;
-    color: var(--ink);
-    text-decoration: none;
-    margin-bottom: 0.85rem;
-    line-height: 1.6;
-  }
-  .footer-col a { color: var(--taupe); transition: color 0.2s; }
-  .footer-col a:hover { color: var(--ink); }
-  .footer-bottom {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-size: 0.75rem;
-    color: var(--stone);
-  }
-
-  /* ───────── Responsive ───────── */
-  @media (max-width: 968px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-image { height: 62vh; }
-    .hero-text { padding: 3.5rem 1.8rem; }
-    .hero-desc { max-width: 100%; }
-    .scroll-cue { display: none; }
-
-    .intro { padding: 4.5rem 1.8rem; }
-
-    .gallery-row, .gallery-row.r1, .gallery-row.r2, .gallery-row.r3, .gallery-row.r4 {
+    .work-grid {
+      display: grid;
       grid-template-columns: 1fr 1fr;
-      padding: 0 1.2rem;
+      gap: 1.25rem;
+    }
+    .work-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.25s, transform 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .work-card:hover {
+      border-color: rgba(0,240,160,0.28);
+      transform: translateY(-5px);
+    }
+    .work-card.large { grid-column: span 2; }
+
+    .work-img {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-card.large .work-img { height: 300px; }
+
+    .work-img-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      opacity: 0.1;
+      user-select: none;
     }
 
-    .story-section { padding: 4.5rem 1.8rem; }
-    .story-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    .story-image { position: static; aspect-ratio: 4/5; }
+    .bg-teal { background: linear-gradient(135deg, #071f19, #0c3027); color: #00F0A0; }
+    .bg-blue { background: linear-gradient(135deg, #07111f, #0b2036); color: #00C8FF; }
+    .bg-purple { background: linear-gradient(135deg, #140820, #1e0f30); color: #B080FF; }
+    .bg-sports { background: linear-gradient(135deg, #0A0A0A, #1a0a0a); color: #FF3300; }
 
-    .signature-section { padding: 4.5rem 1.2rem; }
-    .signature-grid { grid-template-columns: repeat(2, 1fr); }
-
-    .insta-section { padding: 4.5rem 1.2rem; }
-    .insta-grid { grid-template-columns: repeat(3, 1fr); }
-    .insta-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-
-    .store-cta { margin: 0 1.2rem 1.5rem; padding: 3rem 2rem; flex-direction: column; align-items: flex-start; }
-
-    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  }
-
-  @media (max-width: 560px) {
-    .gallery-row, .gallery-row.r1, .gallery-row.r2, .gallery-row.r3, .gallery-row.r4 {
-      grid-template-columns: 1fr;
+    .work-tag-row {
+      position: absolute;
+      top: 1.1rem;
+      left: 1.1rem;
+      display: flex;
+      gap: 0.4rem;
     }
-    .signature-grid { grid-template-columns: 1fr 1fr; }
-    .insta-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+    .work-tag {
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.28rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(240,238,233,0.65);
+    }
+    .work-info { padding: 1.3rem 1.6rem; }
+    .work-client {
+      font-size: 0.72rem;
+      color: rgba(240,238,233,0.3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+    .work-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #F0EEE9;
+    }
+
+    /* ── Coming Soon 카드 ── */
+    .work-card-coming {
+      background: rgba(255,255,255,0.015);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      grid-column: span 2;
+      min-height: 160px;
+    }
+    .coming-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(0,240,160,0.06);
+      border: 1px solid rgba(0,240,160,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #00F0A0;
+      opacity: 0.7;
+    }
+    .coming-text {
+      font-size: 0.88rem;
+      color: rgba(240,238,233,0.25);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .coming-text strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(240,238,233,0.4);
+      margin-bottom: 0.3rem;
+    }
+
+    /* ── Services ── */
+    .services-section {
+      position: relative;
+      z-index: 5;
+      padding: 6rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin-top: 3rem;
+    }
+    .service-card {
+      padding: 2.2rem 2rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      transition: border-color 0.25s, background 0.25s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: rgba(0,240,160,0.22);
+      background: rgba(0,240,160,0.025);
+    }
+    .service-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #00F0A0;
+      margin-bottom: 1.5rem;
+    }
+    .service-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(0,240,160,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.15rem;
+      color: #00F0A0;
+    }
+    .service-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #F0EEE9;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .service-desc {
+      font-size: 0.86rem;
+      color: rgba(240,238,233,0.4);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ── Process ── */
+    .process-section {
+      position: relative;
+      z-index: 5;
+      padding: 6rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .process-steps { margin-top: 3rem; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 2.2rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      align-items: start;
+      transition: background 0.2s;
+      border-radius: 8px;
+    }
+    .process-step:hover { background: rgba(255,255,255,0.02); }
+    .process-step:last-child { border-bottom: none; }
+    .step-num-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,240,160,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #00F0A0;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .step-content { flex: 1; }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #F0EEE9;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    .step-desc {
+      font-size: 0.86rem;
+      color: rgba(240,238,233,0.38);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── CTA Banner ── */
+    .cta-section {
+      position: relative;
+      z-index: 5;
+      margin: 3rem 3rem 0;
+      background: linear-gradient(130deg, #00F0A0 0%, #00C8FF 100%);
+      border-radius: 24px 24px 0 0;
+      padding: 4.5rem 4rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      pointer-events: none;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      left: 38%;
+      bottom: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+    .cta-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #08091A;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      max-width: 400px;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-dark {
+      position: relative;
+      z-index: 1;
+      background: #08091A;
+      color: #F0EEE9;
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-dark:hover { background: #111228; transform: scale(1.04); }
+
+    /* ── Contact Info Bar ── */
+    .contact-bar {
+      position: relative;
+      z-index: 5;
+      margin: 0 3rem;
+      background: #08091A;
+      border: 1px solid rgba(0,240,160,0.18);
+      border-top: none;
+      border-radius: 0 0 24px 24px;
+      padding: 2.2rem 4rem;
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,240,160,0.07);
+      border: 1px solid rgba(0,240,160,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #00F0A0;
+      flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(240,238,233,0.3);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .contact-value {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #F0EEE9;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-value:hover { color: #00F0A0; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 5;
+      padding: 2.8rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin-top: 3rem;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand .logo {
+      font-size: 1.1rem;
+      display: inline-block;
+      margin-bottom: 0.55rem;
+    }
+    .footer-tagline {
+      font-size: 0.78rem;
+      color: rgba(240,238,233,0.25);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+    .footer-rep {
+      font-size: 0.78rem;
+      color: rgba(240,238,233,0.28);
+      margin-top: 0.3rem;
+    }
+    .footer-rep strong {
+      color: rgba(240,238,233,0.45);
+      font-weight: 600;
+    }
+    .footer-address {
+      font-size: 0.74rem;
+      color: rgba(240,238,233,0.2);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(240,238,233,0.28);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(240,238,233,0.65); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .footer-copy {
+      font-size: 0.74rem;
+      color: rgba(240,238,233,0.18);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .btn-nav { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .hero-title { font-size: 2.6rem; }
+
+      .works-section, .services-section, .process-section { padding: 4rem 1.5rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card.large { grid-column: span 1; }
+      .work-card-coming { grid-column: span 1; }
+      .services-grid { grid-template-columns: 1fr; }
+
+      .cta-section { margin: 2rem 1.5rem 0; padding: 2.8rem 2rem; border-radius: 18px 18px 0 0; }
+      .cta-title { font-size: 1.6rem; }
+      .contact-bar { margin: 0 1.5rem; padding: 1.8rem 2rem; gap: 1.5rem; border-radius: 0 0 18px 18px; }
+
+      footer { padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; gap: 1.5rem; }
+      .footer-links { gap: 1.2rem; flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
 
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <!-- Nav -->
-  <nav id="nav">
-    <a href="#" class="nav-logo">Röko</a>
+  <nav>
+    <a href="#" class="logo">pix<span>.</span>craft</a>
     <ul class="nav-links">
-      <li><a onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">LOOKBOOK</a></li>
-      <li><a onclick="document.getElementById('philosophy').scrollIntoView({behavior:'smooth'})">STORY</a></li>
-      <li><a onclick="document.getElementById('instagram').scrollIntoView({behavior:'smooth'})">INSTAGRAM</a></li>
-      <li><a onclick="document.getElementById('store').scrollIntoView({behavior:'smooth'})">SHOP</a></li>
+      <li><a onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">작업</a></li>
+      <li><a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">서비스</a></li>
+      <li><a onclick="document.getElementById('process').scrollIntoView({behavior:'smooth'})">프로세스</a></li>
+      <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">연락하기</a></li>
     </ul>
-    <div class="nav-icons">
-      <a class="nav-icon-link" href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
-      </a>
-      <a class="nav-icon-link" href="https://smartstore.naver.com/roko_" target="_blank" rel="noopener" aria-label="Shop">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2L3 7v13a1 1 0 001 1h16a1 1 0 001-1V7l-3-5z"/><path d="M3 7h18"/><path d="M9 11a3 3 0 006 0"/></svg>
-      </a>
-    </div>
-    <button class="hamburger" aria-label="메뉴 열기" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="btn-nav" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">프로젝트 시작하기</button>
+    <button class="hamburger" aria-label="메뉴 열기" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-image">
-      <img src="images/look_02_01.jpg" alt="Röko 시그니처 룩 — 모헤어 니트와 빈티지 데님" />
+    <div class="hero-eyebrow">웹 디자인 · 개발 에이전시</div>
+    <h1 class="hero-title">
+      브랜드의 첫인상을<br>
+      <span class="accent">픽셀로 짓습니다</span>
+    </h1>
+    <p class="hero-desc">단순히 예쁜 사이트를 만드는 게 아닙니다. 브랜드의 목적, 고객의 행동, 비즈니스의 성장을 함께 설계합니다.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">포트폴리오 보기</button>
+      <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        상담 예약하기
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
-    <div class="hero-text">
-      <div class="hero-eyebrow">Röko · 뢰코</div>
-      <h1 class="hero-title">거친 것 위에<br>놓인<br><em>섬세함</em></h1>
-      <p class="hero-desc">낡은 데님의 질감과 손끝의 레이스가 만나는 자리. Röko는 빈티지한 무드 위에 여리고 로맨틱한 디테일을 겹쳐 입습니다.</p>
-      <a href="#gallery" class="hero-cta" onclick="event.preventDefault(); document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
-        룩북 보러가기
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-    <div class="scroll-cue">SCROLL</div>
   </section>
 
-  <div class="lace-divider">
-    <svg viewBox="0 0 600 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 H600 V14 Q585,28 570,14 Q555,0 540,14 Q525,28 510,14 Q495,0 480,14 Q465,28 450,14 Q435,0 420,14 Q405,28 390,14 Q375,0 360,14 Q345,28 330,14 Q315,0 300,14 Q285,28 270,14 Q255,0 240,14 Q225,28 210,14 Q195,0 180,14 Q165,28 150,14 Q135,0 120,14 Q105,28 90,14 Q75,0 60,14 Q45,28 30,14 Q15,0 0,14 Z" fill="#FAF8F4"/>
-    </svg>
+  <!-- Marquee -->
+  <div class="marquee-strip">
+    <div class="marquee-track" id="marqueeTrack"></div>
   </div>
 
-  <!-- Intro statement -->
-  <section class="intro">
-    <div class="intro-label">Brand Philosophy</div>
-    <p class="intro-statement">바래고 닳은 빈티지 데님 위로,<br><span class="highlight">손으로 뜬 레이스</span>가 살짝 비쳐 보일 때.<br>그 틈에서 Röko의 옷이 시작됩니다.</p>
+  <!-- Works -->
+  <section class="works-section" id="works">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Our Work</div>
+        <div class="section-title">작업 포트폴리오</div>
+      </div>
+    </div>
+    <div class="work-grid">
+
+      <!-- KBA 포트폴리오 카드 (full-width) -->
+      <a href="kba_homepage.html" class="work-card large" target="_blank" rel="noopener">
+        <div class="work-img bg-sports">
+          <!-- 농구 코트 라인 SVG 배경 -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.07" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect x="40" y="20" width="720" height="260" fill="none" stroke="#fff" stroke-width="2"/>
+            <line x1="400" y1="20" x2="400" y2="280" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="400" cy="150" r="60" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="400" cy="150" r="5" fill="#fff"/>
+            <path d="M40 70 Q160 70 160 150 Q160 230 40 230" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <path d="M760 70 Q640 70 640 150 Q640 230 760 230" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="40" cy="150" r="28" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="760" cy="150" r="28" fill="none" stroke="#fff" stroke-width="1.5"/>
+          </svg>
+          <!-- KBA 타이포 -->
+          <div style="position:relative;z-index:2;text-align:center;line-height:1">
+            <div style="font-family:'Syne',sans-serif;font-size:clamp(4rem,9vw,8rem);font-weight:800;letter-spacing:-0.06em;color:#FFFFFF;opacity:0.9;line-height:0.9">KBA</div>
+            <div style="font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:#FF3300;font-weight:600;margin-top:0.6rem">Basketball Academy</div>
+          </div>
+          <!-- 레드 액센트 글로우 -->
+          <div style="position:absolute;bottom:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,51,0,0.18) 0%,transparent 70%);pointer-events:none"></div>
+          <div class="work-tag-row">
+            <span class="work-tag">웹 디자인</span>
+            <span class="work-tag">프론트엔드</span>
+            <span class="work-tag">스포츠</span>
+          </div>
+        </div>
+        <div class="work-info" style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="work-client">KBA Basketball Academy · 2026</div>
+            <div class="work-name">농구 아카데미 브랜드 홈페이지</div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style="opacity:0.3;flex-shrink:0">
+            <path d="M3 15L15 3M15 3H7M15 3V11" stroke="#F0EEE9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Coming Soon 카드 (작게, 절반폭) -->
+      <div class="work-card-coming" style="grid-column:span 1;min-height:120px;padding:2rem 1.5rem">
+        <div class="coming-icon">
+          <i class="ti ti-plus" aria-hidden="true"></i>
+        </div>
+        <div class="coming-text">
+          <strong>다음 프로젝트</strong>
+          지금 상담 문의를 남겨주세요.
+        </div>
+      </div>
+      <div class="work-card-coming" style="grid-column:span 1;min-height:120px;padding:2rem 1.5rem">
+        <div class="coming-icon">
+          <i class="ti ti-plus" aria-hidden="true"></i>
+        </div>
+        <div class="coming-text">
+          <strong>다음 프로젝트</strong>
+          지금 상담 문의를 남겨주세요.
+        </div>
+      </div>
+
+    </div>
   </section>
 
-  <!-- Gallery -->
-  <section class="gallery-section" id="gallery">
-
-    <div class="gallery-row r1">
-      <div class="g-item tall">
-        <img src="images/inner_mesh_shirt_02.jpg" alt="이너 메쉬 셔츠" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">19,900원</div><div class="g-caption-name">이너 메쉬 셔츠</div></div>
+  <!-- Services -->
+  <section class="services-section" id="services">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">우리가 하는 일</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon">
+          <i class="ti ti-layout" aria-hidden="true"></i>
+        </div>
+        <div class="service-name">웹사이트 디자인</div>
+        <div class="service-desc">브랜드 분석부터 와이어프레임, 비주얼 디자인까지 — 단순히 예쁜 것을 넘어 전환하는 디자인을 만듭니다.</div>
       </div>
-      <div class="g-item tall">
-        <img src="images/mesh_apron_skirt_floral_03.jpg" alt="망사 스커트 앞치마" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">13,900원</div><div class="g-caption-name">망사 스커트 앞치마</div></div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-icon">
+          <i class="ti ti-code" aria-hidden="true"></i>
+        </div>
+        <div class="service-name">프론트엔드 개발</div>
+        <div class="service-desc">빠르고 접근성 높은 웹을 구축합니다. React, Next.js 기반으로 SEO와 성능을 모두 잡습니다.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon">
+          <i class="ti ti-shopping-cart" aria-hidden="true"></i>
+        </div>
+        <div class="service-name">쇼핑몰 구축</div>
+        <div class="service-desc">Shopify, WooCommerce, 자체 개발까지. 결제부터 재고 관리까지 판매에 최적화된 커머스를 설계합니다.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon">
+          <i class="ti ti-brand-figma" aria-hidden="true"></i>
+        </div>
+        <div class="service-name">브랜드 아이덴티티</div>
+        <div class="service-desc">로고, 컬러 시스템, 타이포그래피까지 브랜드가 어디서든 일관되게 보이도록 아이덴티티를 구축합니다.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-icon">
+          <i class="ti ti-chart-line" aria-hidden="true"></i>
+        </div>
+        <div class="service-name">전환율 최적화</div>
+        <div class="service-desc">히트맵, A/B 테스트, 사용자 행동 분석으로 더 많은 방문자가 고객이 되도록 사이트를 개선합니다.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-icon">
+          <i class="ti ti-tool" aria-hidden="true"></i>
+        </div>
+        <div class="service-name">유지보수 & 운영</div>
+        <div class="service-desc">런칭 후에도 함께합니다. 정기 업데이트, 성능 모니터링, 콘텐츠 관리까지 안심하고 맡기세요.</div>
       </div>
     </div>
-
-    <div class="gallery-row r2">
-      <div class="g-item square">
-        <img src="images/lace_scarf_03.jpg" alt="레이스 스카프" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">4,900원</div><div class="g-caption-name">레이스 스카프</div></div>
-      </div>
-      <div class="g-item wide">
-        <img src="images/lace_neck_ribbon_06.jpg" alt="이내 목에 묶인 레이스" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">10,900원</div><div class="g-caption-name">이내 목에 묶인 레이스</div></div>
-      </div>
-      <div class="g-item square">
-        <img src="images/black_leather_belt_03.jpg" alt="마일드 블랙 레더벨트" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">10,400원</div><div class="g-caption-name">마일드 블랙 레더벨트</div></div>
-      </div>
-    </div>
-
-    <div class="gallery-row r3">
-      <div class="g-item wide">
-        <img src="images/overfit_jeans_vintage_03.jpg" alt="오버핏 청바지" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">32,900원</div><div class="g-caption-name">오버핏 청바지</div></div>
-      </div>
-      <div class="g-item wide">
-        <img src="images/ballet_skirt_dot_03.jpg" alt="발레코어 스커트" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">14,900원</div><div class="g-caption-name">발레코어 스커트</div></div>
-      </div>
-    </div>
-
-    <div class="gallery-row r4">
-      <div class="g-item tall">
-        <img src="images/inner_ballet_dress_15.jpg" alt="이너 발레 드레스" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">10,900원</div><div class="g-caption-name">이너 발레 드레스</div></div>
-      </div>
-      <div class="g-item tall">
-        <img src="images/ballet_skirt_floral_2_03.jpg" alt="바레코어 묶은 스커트" loading="lazy" />
-        <div class="g-caption"><div class="g-caption-price">14,900원</div><div class="g-caption-name">바레코어 묶은 스커트</div></div>
-      </div>
-    </div>
-
   </section>
 
-  <div class="lace-divider" style="transform: rotate(180deg)">
-    <svg viewBox="0 0 600 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 H600 V14 Q585,28 570,14 Q555,0 540,14 Q525,28 510,14 Q495,0 480,14 Q465,28 450,14 Q435,0 420,14 Q405,28 390,14 Q375,0 360,14 Q345,28 330,14 Q315,0 300,14 Q285,28 270,14 Q255,0 240,14 Q225,28 210,14 Q195,0 180,14 Q165,28 150,14 Q135,0 120,14 Q105,28 90,14 Q75,0 60,14 Q45,28 30,14 Q15,0 0,14 Z" fill="#F4F0E8"/>
-    </svg>
+  <!-- Process -->
+  <section class="process-section" id="process">
+    <div class="section-label">How We Work</div>
+    <div class="section-title">프로젝트 진행 방식</div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num-circle">01</div>
+        <div class="step-content">
+          <div class="step-title">발견 — 브랜드와 목표 이해</div>
+          <div class="step-desc">사업 목표, 타깃 고객, 경쟁 환경을 분석합니다. 좋은 사이트는 좋은 질문에서 시작됩니다.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num-circle">02</div>
+        <div class="step-content">
+          <div class="step-title">설계 — 구조와 흐름 설계</div>
+          <div class="step-desc">정보 구조와 사용자 여정을 설계합니다. 방문자가 원하는 행동을 자연스럽게 하도록 유도합니다.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num-circle">03</div>
+        <div class="step-content">
+          <div class="step-title">디자인 — 브랜드를 시각화</div>
+          <div class="step-desc">색상, 타이포그래피, 레이아웃이 브랜드의 성격을 담습니다. 피드백을 반영해 함께 완성합니다.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num-circle">04</div>
+        <div class="step-content">
+          <div class="step-title">개발 & 론칭 — 실제 코드로 구현</div>
+          <div class="step-desc">속도, 접근성, SEO를 고려한 퍼블리싱 후 론칭합니다. 론칭 후 30일 무상 A/S가 포함됩니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section" id="contact">
+    <div class="cta-title">프로젝트 이야기,<br>지금 시작할 수 있어요</div>
+    <a class="btn-dark" href="tel:01026958338">무료 상담 예약하기 →</a>
   </div>
 
-  <!-- Story -->
-  <section class="story-section" id="philosophy">
-    <div class="story-inner">
-      <div class="story-image">
-        <img src="images/look_03_02.jpg" alt="Röko 브랜드 스토리" />
+  <!-- Contact Info Bar -->
+  <div class="contact-bar">
+    <div class="contact-item">
+      <div class="contact-icon">
+        <i class="ti ti-mail" aria-hidden="true"></i>
       </div>
-      <div class="story-text">
-        <div class="story-eyebrow">Our Story</div>
-
-        <p class="story-lede">Röko는 <span class="neg">‘키가 큰 사람만 예쁜 옷을 입을 수 있다’</span>는 생각에서 시작되지 않았습니다.<br>오히려 그 반대였습니다.</p>
-
-        <div class="story-body">
-          <p>작은 키 때문에 옷을 포기하는 사람이 없었으면 좋겠다는 마음.<br>
-          조금만 허리를 잡아주고, 레이스를 한 겹 더해주고, 벨트 하나만 바꿔도 — 옷의 분위기와 비율은 완전히 달라질 수 있습니다.</p>
-
-          <p>Röko는 화려한 옷을 만드는 브랜드가 아닙니다.<br>
-          당신의 옷장을 더 특별하게 만들어 주는 작은 디테일을 만듭니다.</p>
-        </div>
-
-        <div class="story-detail-list">
-          <span class="story-detail-item">레이스 이너</span>
-          <span class="story-detail-item">허리 스트랩</span>
-          <span class="story-detail-item">포인트 벨트</span>
-        </div>
-
-        <div class="story-body">
-          <p>하나의 아이템이 당신의 스타일을 바꾸고, 당신의 자신감을 완성합니다.<br>
-          키는 스타일을 결정하지 않습니다.</p>
-        </div>
-
-        <p class="story-closing">Röko는 모든 작은 디테일이<br>당신을 가장 아름답게 만드는 순간을 함께합니다.</p>
+      <div>
+        <div class="contact-label">이메일</div>
+        <a class="contact-value" href="mailto:sky3608338@naver.com">sky3608338@naver.com</a>
       </div>
     </div>
-  </section>
-
-  <!-- Texture strip -->
-  <div class="texture-strip"></div>
-
-  <!-- Signature moment -->
-  <section class="signature-section">
-    <div class="signature-eyebrow">Signature Layering</div>
-    <h2 class="signature-title">레이어드의 미학</h2>
-    <div class="signature-grid">
-      <div class="sig-item"><img src="images/inner_mesh_shirt_07.jpg" alt="레이어드 디테일 1" loading="lazy" /></div>
-      <div class="sig-item"><img src="images/ballet_skirt_dot_04.jpg" alt="레이어드 디테일 2" loading="lazy" /></div>
-      <div class="sig-item"><img src="images/mesh_apron_skirt_floral_02.jpg" alt="레이어드 디테일 3" loading="lazy" /></div>
-      <div class="sig-item"><img src="images/overfit_jeans_black_01.jpg" alt="레이어드 디테일 4" loading="lazy" /></div>
-    </div>
-  </section>
-
-  <!-- Instagram -->
-  <section class="insta-section" id="instagram">
-    <div class="insta-header">
-      <div class="insta-title-group">
-        <div class="intro-label">Follow Along</div>
-        <div class="insta-title">@roko_official</div>
+    <div class="contact-item">
+      <div class="contact-icon">
+        <i class="ti ti-phone" aria-hidden="true"></i>
       </div>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener" class="insta-handle">
-        인스타그램에서 더 보기
-        <svg width="13" height="13" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div>
+        <div class="contact-label">전화 / 문자</div>
+        <a class="contact-value" href="tel:01026958338">010-2695-8338</a>
+      </div>
     </div>
-    <div class="insta-grid">
-      <div class="insta-item"><img src="images/lace_neck_ribbon_03.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-      <div class="insta-item"><img src="images/inner_ballet_dress_03.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-      <div class="insta-item"><img src="images/lace_scarf_01.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-      <div class="insta-item"><img src="images/ballet_skirt_floral_2_01.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-      <div class="insta-item"><img src="images/overfit_jeans_vintage_01.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-    </div>
-  </section>
-
-  <!-- Store CTA -->
-  <div class="store-cta" id="store">
-    <div class="store-cta-text">
-      <div class="store-cta-label">Shop Now</div>
-      <div class="store-cta-title">지금 입은 그 무드,<br>스마트스토어에서 만나보세요</div>
-    </div>
-    <a class="store-btn" href="https://smartstore.naver.com/roko_" target="_blank" rel="noopener">
-      네이버 스마트스토어 바로가기
-      <svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
   </div>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">Röko</div>
-        <p class="footer-tagline">거친 것 위에 놓인 섬세함.<br>빈티지 무드의 여성 캐주얼 브랜드 Röko입니다.</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">pix<span>.</span>craft</a>
+        <div class="footer-tagline">브랜드의 첫인상을 픽셀로 짓는<br>웹 디자인 에이전시</div>
+        <div class="footer-rep">대표 <strong>신태섭</strong></div>
+        <div class="footer-address">경기도 의정부시 의정부동<br>푸르지오 더 센트럴 108동</div>
       </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Shop</div>
-        <a href="https://smartstore.naver.com/roko_" target="_blank" rel="noopener">네이버 스마트스토어</a>
-        <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Info</div>
-        <p>고객센터 운영시간<br>평일 10:00 – 17:00<br>(주말 · 공휴일 휴무)</p>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/isaac_10608" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:sky3608338@naver.com">이메일</a>
+        <a href="tel:01026958338">전화</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 Röko. All rights reserved.</div>
-      <div>Designed by pixcraft</div>
+      <div class="footer-copy">© 2025 pixcraft. All rights reserved.</div>
     </div>
   </footer>
 
   <script>
-    // Nav scroll shadow
-    const navEl = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      navEl.classList.toggle('scrolled', window.scrollY > 20);
+    // 커서 글로우
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
     });
 
-    // Fade-in on scroll
+    // 마퀴 텍스트 생성
+    const marqueeItems = [
+      'UI/UX 디자인', '쇼핑몰 구축', '브랜딩', '프론트엔드 개발',
+      '랜딩 페이지', 'SEO 최적화', '모션 디자인', '웹앱 개발',
+      '리뉴얼 프로젝트', '성과 중심 설계'
+    ];
+    const track = document.getElementById('marqueeTrack');
+    const repeated = [...marqueeItems, ...marqueeItems];
+    repeated.forEach((item, i) => {
+      const el = document.createElement('span');
+      el.className = 'marquee-item';
+      el.innerHTML = item + (i < repeated.length - 1 ? ' <span class="marquee-dot">·</span> ' : '');
+      track.appendChild(el);
+    });
+
+    // 스크롤 페이드인
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -824,12 +994,12 @@
           entry.target.style.transform = 'translateY(0)';
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.g-item, .sig-item, .insta-item, .story-image, .story-text').forEach(el => {
+    document.querySelectorAll('.work-card, .work-card-coming, .service-card, .process-step').forEach(el => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, background 0.25s';
       observer.observe(el);
     });
   </script>
