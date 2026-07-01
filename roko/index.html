@@ -1,1 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Röko — 뢰코</title>
+<meta name="description" content="거친 것 위에 놓인 섬세함. 빈티지 무드의 여성 캐주얼 브랜드 Röko." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Italiana&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
+  :root {
+    --ivory: #FAF8F4;
+    --card: #F4F0E8;
+    --ink: #1C1916;
+    --stone: #C9C0AE;
+    --taupe: #8A8073;
+    --line: rgba(28,25,22,0.12);
+    --serif: 'Cormorant Garamond', serif;
+    --display: 'Italiana', serif;
+    --sans: 'Pretendard', -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--ivory);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  /* ───────── Lace scallop divider (signature element) ───────── */
+  .lace-divider {
+    width: 100%;
+    height: 28px;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .lace-divider svg { width: 100%; height: 100%; display: block; }
+
+  /* ───────── Nav ───────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(250,248,244,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 1px 0 var(--line); }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    color: var(--taupe);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-icons { display: flex; gap: 1.2rem; align-items: center; }
+  .nav-icon-link {
+    color: var(--ink);
+    opacity: 0.65;
+    transition: opacity 0.2s;
+  }
+  .nav-icon-link:hover { opacity: 1; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span { width: 22px; height: 1px; background: var(--ink); }
+
+  /* ───────── Hero ───────── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
+  }
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4.5rem 4rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 4.2vw, 4.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin-bottom: 2.2rem;
+    color: var(--ink);
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--taupe);
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--taupe);
+    max-width: 380px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.4rem;
+    width: fit-content;
+    transition: gap 0.25s, opacity 0.2s;
+  }
+  .hero-cta:hover { gap: 1.1rem; }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 4.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--taupe);
+    text-transform: uppercase;
+  }
+  .scroll-cue::after {
+    content: '';
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(var(--taupe), transparent);
+    animation: scrollLine 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollLine { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  /* ───────── Intro / Brand statement ───────── */
+  .intro {
+    padding: 7rem 4.5rem;
+    text-align: center;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .intro-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 2rem;
+  }
+  .intro-statement {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .intro-statement .highlight {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* ───────── Gallery (asymmetric editorial grid) ───────── */
+  .gallery-section { padding: 2rem 0 6rem; }
+  .gallery-row {
+    display: grid;
+    gap: 1.1rem;
+    padding: 0 3rem;
+    margin-bottom: 1.1rem;
+  }
+  .gallery-row.r1 { grid-template-columns: 1.3fr 1fr; }
+  .gallery-row.r2 { grid-template-columns: 0.8fr 1.2fr 0.8fr; }
+  .gallery-row.r3 { grid-template-columns: 1fr 1fr; }
+  .gallery-row.r4 { grid-template-columns: 1fr 0.75fr; }
+
+  .g-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--card);
+    cursor: pointer;
+  }
+  .g-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .g-item:hover img { transform: scale(1.035); }
+  .g-item.tall { aspect-ratio: 3/4.1; }
+  .g-item.wide { aspect-ratio: 4/3.1; }
+  .g-item.square { aspect-ratio: 1/1.05; }
+
+  .g-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.3rem 1.4rem;
+    background: linear-gradient(to top, rgba(20,17,14,0.55), transparent);
+    color: #FAF8F4;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .g-item:hover .g-caption { opacity: 1; }
+  .g-caption-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 0.25rem;
+  }
+  .g-caption-price {
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  .g-caption-name { font-family: var(--serif); font-size: 1.15rem; font-style: italic; }
+
+  /* ───────── Story (brand philosophy) ───────── */
+  .story-section {
+    background: var(--card);
+    padding: 8rem 3rem;
+  }
+  .story-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .story-image {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: sticky;
+    top: 7rem;
+  }
+  .story-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .story-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 2.5rem;
+  }
+  .story-lede {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.3vw, 2rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+  .story-lede .neg { color: var(--taupe); }
+  .story-body p {
+    font-size: 0.96rem;
+    line-height: 2.1;
+    color: var(--taupe);
+    font-weight: 300;
+    margin-bottom: 1.7rem;
+  }
+  .story-detail-list {
+    margin: 2.6rem 0;
+    padding: 2.2rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .story-detail-item {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .story-closing {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-top: 2.6rem;
+  }
+
+  /* ───────── Texture strip (vintage denim wash motif) ───────── */
+  .texture-strip {
+    height: 120px;
+    background: linear-gradient(115deg, #2A2622 0%, #4D453A 35%, #6B6155 55%, #4D453A 75%, #2A2622 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .texture-strip::before {
+    content: 'Röko · Röko · Röko · Röko · Röko · Röko · Röko · Röko · ';
+    position: absolute;
+    white-space: nowrap;
+    font-family: var(--display);
+    font-size: 3.2rem;
+    letter-spacing: 0.05em;
+    color: rgba(250,248,244,0.07);
+    top: 50%;
+    transform: translateY(-50%);
+    animation: marqueeScroll 28s linear infinite;
+  }
+  @keyframes marqueeScroll {
+    0% { left: 0; }
+    100% { left: -50%; }
+  }
+
+  /* ───────── Lookbook full bleed moment (signature) ───────── */
+  .signature-section {
+    position: relative;
+    padding: 7rem 3rem;
+    text-align: center;
+  }
+  .signature-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 1.4rem;
+  }
+  .signature-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 400;
+    margin-bottom: 4rem;
+  }
+  .signature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .sig-item { aspect-ratio: 3/4; overflow: hidden; background: var(--card); }
+  .sig-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+  .sig-item:hover img { transform: scale(1.04); }
+
+  /* ───────── Instagram strip ───────── */
+  .insta-section { padding: 6rem 3rem; }
+  .insta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    max-width: 1400px;
+    margin: 0 auto 2.5rem;
+  }
+  .insta-title-group .intro-label { margin-bottom: 0.6rem; }
+  .insta-title {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-style: italic;
+  }
+  .insta-handle {
+    font-size: 0.85rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.7rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .insta-item { aspect-ratio: 1/1; overflow: hidden; background: var(--card); position: relative; }
+  .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.5s; }
+  .insta-item:hover img { transform: scale(1.06); }
+  .insta-overlay {
+    position: absolute; inset: 0;
+    background: rgba(28,25,22,0.25);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .insta-item:hover .insta-overlay { opacity: 1; }
+  .insta-overlay svg { color: #FAF8F4; }
+
+  /* ───────── CTA / Store banner ───────── */
+  .store-cta {
+    margin: 0 3rem 3rem;
+    background: var(--ink);
+    border-radius: 2px;
+    padding: 5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .store-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(250,248,244,0.06), transparent 50%);
+    pointer-events: none;
+  }
+  .store-cta-text { position: relative; z-index: 1; }
+  .store-cta-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 1.2rem;
+  }
+  .store-cta-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--ivory);
+    font-weight: 400;
+    max-width: 480px;
+    line-height: 1.35;
+  }
+  .store-btn {
+    position: relative;
+    z-index: 1;
+    background: var(--ivory);
+    color: var(--ink);
+    border: none;
+    padding: 1.1rem 2.6rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .store-btn:hover { background: var(--card); transform: translateY(-2px); }
+
+  /* ───────── Footer ───────── */
+  footer {
+    padding: 4rem 3rem 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+  }
+  .footer-logo {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.2rem;
+  }
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: var(--taupe);
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 280px;
+  }
+  .footer-col-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 1.3rem;
+  }
+  .footer-col a, .footer-col p {
+    display: block;
+    font-size: 0.86rem;
+    color: var(--ink);
+    text-decoration: none;
+    margin-bottom: 0.85rem;
+    line-height: 1.6;
+  }
+  .footer-col a { color: var(--taupe); transition: color 0.2s; }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: var(--stone);
+  }
+
+  /* ───────── Responsive ───────── */
+  @media (max-width: 968px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-image { height: 62vh; }
+    .hero-text { padding: 3.5rem 1.8rem; }
+    .hero-desc { max-width: 100%; }
+    .scroll-cue { display: none; }
+
+    .intro { padding: 4.5rem 1.8rem; }
+
+    .gallery-row, .gallery-row.r1, .gallery-row.r2, .gallery-row.r3, .gallery-row.r4 {
+      grid-template-columns: 1fr 1fr;
+      padding: 0 1.2rem;
+    }
+
+    .story-section { padding: 4.5rem 1.8rem; }
+    .story-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .story-image { position: static; aspect-ratio: 4/5; }
+
+    .signature-section { padding: 4.5rem 1.2rem; }
+    .signature-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .insta-section { padding: 4.5rem 1.2rem; }
+    .insta-grid { grid-template-columns: repeat(3, 1fr); }
+    .insta-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+    .store-cta { margin: 0 1.2rem 1.5rem; padding: 3rem 2rem; flex-direction: column; align-items: flex-start; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 560px) {
+    .gallery-row, .gallery-row.r1, .gallery-row.r2, .gallery-row.r3, .gallery-row.r4 {
+      grid-template-columns: 1fr;
+    }
+    .signature-grid { grid-template-columns: 1fr 1fr; }
+    .insta-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Röko</a>
+    <ul class="nav-links">
+      <li><a onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">LOOKBOOK</a></li>
+      <li><a onclick="document.getElementById('philosophy').scrollIntoView({behavior:'smooth'})">STORY</a></li>
+      <li><a onclick="document.getElementById('instagram').scrollIntoView({behavior:'smooth'})">INSTAGRAM</a></li>
+      <li><a onclick="document.getElementById('store').scrollIntoView({behavior:'smooth'})">SHOP</a></li>
+    </ul>
+    <div class="nav-icons">
+      <a class="nav-icon-link" href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+      </a>
+      <a class="nav-icon-link" href="https://smartstore.naver.com/roko_" target="_blank" rel="noopener" aria-label="Shop">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2L3 7v13a1 1 0 001 1h16a1 1 0 001-1V7l-3-5z"/><path d="M3 7h18"/><path d="M9 11a3 3 0 006 0"/></svg>
+      </a>
+    </div>
+    <button class="hamburger" aria-label="메뉴 열기" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-image">
+      <img src="images/look_02_01.jpg" alt="Röko 시그니처 룩 — 모헤어 니트와 빈티지 데님" />
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">Röko · 뢰코</div>
+      <h1 class="hero-title">거친 것 위에<br>놓인<br><em>섬세함</em></h1>
+      <p class="hero-desc">낡은 데님의 질감과 손끝의 레이스가 만나는 자리. Röko는 빈티지한 무드 위에 여리고 로맨틱한 디테일을 겹쳐 입습니다.</p>
+      <a href="#gallery" class="hero-cta" onclick="event.preventDefault(); document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+        룩북 보러가기
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="scroll-cue">SCROLL</div>
+  </section>
+
+  <div class="lace-divider">
+    <svg viewBox="0 0 600 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 H600 V14 Q585,28 570,14 Q555,0 540,14 Q525,28 510,14 Q495,0 480,14 Q465,28 450,14 Q435,0 420,14 Q405,28 390,14 Q375,0 360,14 Q345,28 330,14 Q315,0 300,14 Q285,28 270,14 Q255,0 240,14 Q225,28 210,14 Q195,0 180,14 Q165,28 150,14 Q135,0 120,14 Q105,28 90,14 Q75,0 60,14 Q45,28 30,14 Q15,0 0,14 Z" fill="#FAF8F4"/>
+    </svg>
+  </div>
+
+  <!-- Intro statement -->
+  <section class="intro">
+    <div class="intro-label">Brand Philosophy</div>
+    <p class="intro-statement">바래고 닳은 빈티지 데님 위로,<br><span class="highlight">손으로 뜬 레이스</span>가 살짝 비쳐 보일 때.<br>그 틈에서 Röko의 옷이 시작됩니다.</p>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery-section" id="gallery">
+
+    <div class="gallery-row r1">
+      <div class="g-item tall">
+        <img src="images/inner_mesh_shirt_02.jpg" alt="이너 메쉬 셔츠" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">19,900원</div><div class="g-caption-name">이너 메쉬 셔츠</div></div>
+      </div>
+      <div class="g-item tall">
+        <img src="images/mesh_apron_skirt_floral_03.jpg" alt="망사 스커트 앞치마" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">13,900원</div><div class="g-caption-name">망사 스커트 앞치마</div></div>
+      </div>
+    </div>
+
+    <div class="gallery-row r2">
+      <div class="g-item square">
+        <img src="images/lace_scarf_03.jpg" alt="레이스 스카프" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">4,900원</div><div class="g-caption-name">레이스 스카프</div></div>
+      </div>
+      <div class="g-item wide">
+        <img src="images/lace_neck_ribbon_06.jpg" alt="이내 목에 묶인 레이스" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">10,900원</div><div class="g-caption-name">이내 목에 묶인 레이스</div></div>
+      </div>
+      <div class="g-item square">
+        <img src="images/black_leather_belt_03.jpg" alt="마일드 블랙 레더벨트" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">10,400원</div><div class="g-caption-name">마일드 블랙 레더벨트</div></div>
+      </div>
+    </div>
+
+    <div class="gallery-row r3">
+      <div class="g-item wide">
+        <img src="images/overfit_jeans_vintage_03.jpg" alt="오버핏 청바지" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">32,900원</div><div class="g-caption-name">오버핏 청바지</div></div>
+      </div>
+      <div class="g-item wide">
+        <img src="images/ballet_skirt_dot_03.jpg" alt="발레코어 스커트" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">14,900원</div><div class="g-caption-name">발레코어 스커트</div></div>
+      </div>
+    </div>
+
+    <div class="gallery-row r4">
+      <div class="g-item tall">
+        <img src="images/inner_ballet_dress_15.jpg" alt="이너 발레 드레스" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">10,900원</div><div class="g-caption-name">이너 발레 드레스</div></div>
+      </div>
+      <div class="g-item tall">
+        <img src="images/ballet_skirt_floral_2_03.jpg" alt="바레코어 묶은 스커트" loading="lazy" />
+        <div class="g-caption"><div class="g-caption-price">14,900원</div><div class="g-caption-name">바레코어 묶은 스커트</div></div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="lace-divider" style="transform: rotate(180deg)">
+    <svg viewBox="0 0 600 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 H600 V14 Q585,28 570,14 Q555,0 540,14 Q525,28 510,14 Q495,0 480,14 Q465,28 450,14 Q435,0 420,14 Q405,28 390,14 Q375,0 360,14 Q345,28 330,14 Q315,0 300,14 Q285,28 270,14 Q255,0 240,14 Q225,28 210,14 Q195,0 180,14 Q165,28 150,14 Q135,0 120,14 Q105,28 90,14 Q75,0 60,14 Q45,28 30,14 Q15,0 0,14 Z" fill="#F4F0E8"/>
+    </svg>
+  </div>
+
+  <!-- Story -->
+  <section class="story-section" id="philosophy">
+    <div class="story-inner">
+      <div class="story-image">
+        <img src="images/look_03_02.jpg" alt="Röko 브랜드 스토리" />
+      </div>
+      <div class="story-text">
+        <div class="story-eyebrow">Our Story</div>
+
+        <p class="story-lede">Röko는 <span class="neg">‘키가 큰 사람만 예쁜 옷을 입을 수 있다’</span>는 생각에서 시작되지 않았습니다.<br>오히려 그 반대였습니다.</p>
+
+        <div class="story-body">
+          <p>작은 키 때문에 옷을 포기하는 사람이 없었으면 좋겠다는 마음.<br>
+          조금만 허리를 잡아주고, 레이스를 한 겹 더해주고, 벨트 하나만 바꿔도 — 옷의 분위기와 비율은 완전히 달라질 수 있습니다.</p>
+
+          <p>Röko는 화려한 옷을 만드는 브랜드가 아닙니다.<br>
+          당신의 옷장을 더 특별하게 만들어 주는 작은 디테일을 만듭니다.</p>
+        </div>
+
+        <div class="story-detail-list">
+          <span class="story-detail-item">레이스 이너</span>
+          <span class="story-detail-item">허리 스트랩</span>
+          <span class="story-detail-item">포인트 벨트</span>
+        </div>
+
+        <div class="story-body">
+          <p>하나의 아이템이 당신의 스타일을 바꾸고, 당신의 자신감을 완성합니다.<br>
+          키는 스타일을 결정하지 않습니다.</p>
+        </div>
+
+        <p class="story-closing">Röko는 모든 작은 디테일이<br>당신을 가장 아름답게 만드는 순간을 함께합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Texture strip -->
+  <div class="texture-strip"></div>
+
+  <!-- Signature moment -->
+  <section class="signature-section">
+    <div class="signature-eyebrow">Signature Layering</div>
+    <h2 class="signature-title">레이어드의 미학</h2>
+    <div class="signature-grid">
+      <div class="sig-item"><img src="images/inner_mesh_shirt_07.jpg" alt="레이어드 디테일 1" loading="lazy" /></div>
+      <div class="sig-item"><img src="images/ballet_skirt_dot_04.jpg" alt="레이어드 디테일 2" loading="lazy" /></div>
+      <div class="sig-item"><img src="images/mesh_apron_skirt_floral_02.jpg" alt="레이어드 디테일 3" loading="lazy" /></div>
+      <div class="sig-item"><img src="images/overfit_jeans_black_01.jpg" alt="레이어드 디테일 4" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- Instagram -->
+  <section class="insta-section" id="instagram">
+    <div class="insta-header">
+      <div class="insta-title-group">
+        <div class="intro-label">Follow Along</div>
+        <div class="insta-title">@roko_official</div>
+      </div>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" class="insta-handle">
+        인스타그램에서 더 보기
+        <svg width="13" height="13" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item"><img src="images/lace_neck_ribbon_03.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
+      <div class="insta-item"><img src="images/inner_ballet_dress_03.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
+      <div class="insta-item"><img src="images/lace_scarf_01.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
+      <div class="insta-item"><img src="images/ballet_skirt_floral_2_01.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
+      <div class="insta-item"><img src="images/overfit_jeans_vintage_01.jpg" alt="인스타그램 피드" loading="lazy" /><div class="insta-overlay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div></div>
+    </div>
+  </section>
+
+  <!-- Store CTA -->
+  <div class="store-cta" id="store">
+    <div class="store-cta-text">
+      <div class="store-cta-label">Shop Now</div>
+      <div class="store-cta-title">지금 입은 그 무드,<br>스마트스토어에서 만나보세요</div>
+    </div>
+    <a class="store-btn" href="https://smartstore.naver.com/roko_" target="_blank" rel="noopener">
+      네이버 스마트스토어 바로가기
+      <svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Röko</div>
+        <p class="footer-tagline">거친 것 위에 놓인 섬세함.<br>빈티지 무드의 여성 캐주얼 브랜드 Röko입니다.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Shop</div>
+        <a href="https://smartstore.naver.com/roko_" target="_blank" rel="noopener">네이버 스마트스토어</a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Info</div>
+        <p>고객센터 운영시간<br>평일 10:00 – 17:00<br>(주말 · 공휴일 휴무)</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Röko. All rights reserved.</div>
+      <div>Designed by pixcraft</div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll shadow
+    const navEl = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.g-item, .sig-item, .insta-item, .story-image, .story-text').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
